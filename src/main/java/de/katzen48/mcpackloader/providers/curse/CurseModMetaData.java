@@ -47,8 +47,6 @@ public class CurseModMetaData implements ModMetaData
 	
 	private void parse(int projectId, int fileId)
 	{
-		System.out.println("Starting to parse Project '" + projectId + "'");
-		
 		this.name = parseAddonMeta(projectId).get("name").getAsString();
 		
 		JsonObject fileMeta = parseAddonFileMeta(projectId, fileId);

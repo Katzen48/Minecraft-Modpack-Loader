@@ -39,7 +39,12 @@ public class CurseModpackLoader implements ModpackLoader
 		String fileUrl = modpackMeta.get("downloadUrl").getAsString();
 		String fileName = modpackMeta.get("fileNameOnDisk").getAsString();
 		
-		String tmpFileUrl = HttpUtils.downloadFile(fileUrl, System.getProperty("java.io.tmpdir"), fileName);
+		String tmpFileUrl = System.getProperty("java.io.tmpdir") + "/" + fileName;
+		
+		if(!new File(tmpFileUrl).exists())
+		{
+			HttpUtils.downloadFile(fileUrl, System.getProperty("java.io.tmpdir"), fileName);
+		}
 		
 		return new CurseParser(new File(tmpFileUrl)).parse();
 	}
